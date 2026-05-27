@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cieunhong archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { 
+            font-family: "Inter", system-ui, -apple-system, sans-serif; 
+            background-color: #FFFFF0; /* 따뜻한 아이보리 배경색 */
+        }
+        .lowercase-menu { text-transform: lowercase; }
+    </style>
+</head>
+<body class="text-neutral-800 min-h-screen flex flex-col justify-between p-6 md:p-16 antialiased">
+    
+    <header class="max-w-2xl w-full mx-auto mb-16">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <h1 class="text-base font-semibold tracking-tight cursor-pointer" onclick="switchTab('post')">cieunhong.</h1>
+            <nav class="flex flex-wrap gap-x-6 gap-y-2 lowercase-menu text-xs font-medium text-neutral-400">
+                <button onclick="switchTab('post')" id="btn-post" class="text-neutral-900 underline underline-offset-4">post</button>
+                <button onclick="switchTab('stories')" id="btn-stories" class="hover:text-neutral-900 transition">stories</button>
+                <button onclick="switchTab('guestbook')" id="btn-guestbook" class="hover:text-neutral-900 transition">guestbook</button>
+            </nav>
+        </div>
+        <hr class="border-neutral-200/60 mt-6">
+    </header>
+
+    <main class="max-w-2xl w-full mx-auto flex-grow">
+        
+        <section id="sec-post" class="tab-content space-y-10">
+            <div class="space-y-4 flex flex-col justify-between min-h-[140px]">
+                <div>
+                    <h2 class="text-lg font-medium tracking-tight text-neutral-900">나만의 디지털 아카이브를 시작하며</h2>
+                    
+                    <p class="text-neutral-600 text-[14px] leading-relaxed tracking-normal mt-3">
+                        매달 나가는 돈 없이 저 개발자(윌리엄)처럼 평생 무료로 사이트를 운영하기 위해, 결국 코딩 메모장 방식을 감수해보기로 했다. 처음엔 영어가 가득한 코드가 낯설고 무서웠는데, 막상 이렇게 한글로 일기를 적어 넣으니 나만의 진짜 비밀 기지를 짓는 것 같아서 묘한 성취감이 든다. 앞으로 이곳에 내 생각과 조각들을 차곡차곡 모아나가야지.
+                    </p>
+                </div>
+                <p class="text-[11px] text-neutral-400 tracking-wider mt-4">27-05-2026</p>
+            </div>
+        </section>
+
+        <section id="sec-stories" class="tab-content space-y-10 hidden">
+            <div class="space-y-4">
+                <div class="w-full aspect-[4/3] bg-neutral-200/40 rounded-sm flex items-center justify-center text-neutral-400 text-xs tracking-widest lowercase border border-neutral-300/20">[오늘 마신 커피 사진 자리]</div>
+                
+                <p class="text-neutral-500 text-xs italic tracking-wide leading-relaxed mt-2">이 작은 조각들이 모여 나의 하루가 흘러간다.</p>
