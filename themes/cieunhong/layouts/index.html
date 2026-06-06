@@ -1,126 +1,487 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>cieunhong</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#FFFFF0;--text:#1a1a1a;--muted:#888;--faint:#bbb;--border:rgba(0,0,0,0.1)}
-body{font-family:"Space Mono",monospace;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;padding:2.5rem 1.5rem;-webkit-font-smoothing:antialiased}
-.wrap{max-width:600px;width:100%;margin:0 auto;flex:1;display:flex;flex-direction:column}
-header{margin-bottom:3rem}
-.header-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:1rem}
-.site-title{font-size:.85rem;font-weight:700;cursor:pointer;text-decoration:none;color:var(--text)}
-nav{display:flex;gap:1.5rem}
-nav button{background:none;border:none;cursor:pointer;font-family:"Space Mono",monospace;font-size:.72rem;color:var(--faint);padding:0;transition:color .15s;letter-spacing:.03em}
-nav button:hover{color:var(--text)}
-nav button.active{color:var(--text);text-decoration:underline;text-underline-offset:4px}
-.header-rule{border:none;border-top:1px solid var(--border);margin-top:1.25rem}
-main{flex:1}
-.tab{display:none}
-.tab.active{display:block}
-.post-list{list-style:none}
-.post-item{padding:1.4rem 0;border-bottom:1px solid var(--border);cursor:pointer}
-.post-item:hover .post-title{text-decoration:underline;text-underline-offset:3px}
-.post-title{font-size:.85rem;font-weight:700;line-height:1.4;margin-bottom:.5rem}
-.post-excerpt{font-size:.75rem;line-height:1.7;color:#555;margin-bottom:.75rem}
-.post-date{font-size:.65rem;color:var(--faint);letter-spacing:.06em}
-.post-view{display:none}
-.post-view.active{display:block}
-.back-btn{background:none;border:none;font-family:"Space Mono",monospace;font-size:.7rem;color:var(--muted);cursor:pointer;padding:0;margin-bottom:2rem;letter-spacing:.02em}
-.back-btn:hover{color:var(--text)}
-.post-full-title{font-size:1rem;font-weight:700;margin-bottom:1.5rem;line-height:1.4}
-.post-full-body{font-size:.78rem;line-height:1.9;color:#444}
-.post-full-body p{margin-bottom:1rem}
-.post-full-date{font-size:.65rem;color:var(--faint);letter-spacing:.06em;margin-top:2rem}
-.stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:.5rem}
-.story-card{border:1px solid var(--border)}
-.story-img{width:100%;aspect-ratio:4/3;background:#f0ede0;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--faint);letter-spacing:.08em;overflow:hidden}
-.story-img img{width:100%;height:100%;object-fit:cover}
-.story-caption{padding:.6rem .75rem;font-size:.65rem;color:var(--muted);line-height:1.5;font-style:italic}
-.story-date{padding:0 .75rem .6rem;font-size:.6rem;color:var(--faint);letter-spacing:.05em}
-.guestbook-prompt{font-size:.72rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;font-style:italic}
-textarea{width:100%;padding:.85rem;font-family:"Space Mono",monospace;font-size:.72rem;background:transparent;border:1px solid var(--border);color:var(--text);resize:none;height:90px;outline:none;line-height:1.6;transition:border-color .15s}
-textarea:focus{border-color:var(--text)}
-textarea::placeholder{color:var(--faint)}
-.submit-btn{margin-top:.6rem;background:var(--text);color:var(--bg);border:none;font-family:"Space Mono",monospace;font-size:.65rem;letter-spacing:.05em;padding:.6rem 1rem;cursor:pointer;transition:opacity .15s}
-.submit-btn:hover{opacity:.75}
-.messages{margin-top:2rem;border-top:1px solid var(--border);padding-top:1.5rem;display:flex;flex-direction:column;gap:1rem}
-.msg{padding:.85rem;border:1px solid var(--border);background:rgba(255,255,255,.4)}
-.msg p{font-size:.72rem;line-height:1.7;color:#444}
-.msg-meta{font-size:.6rem;color:var(--faint);margin-top:.5rem;letter-spacing:.04em}
-footer{max-width:600px;width:100%;margin:3rem auto 0;padding-top:1.25rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:var(--faint);letter-spacing:.05em}
-footer button{background:none;border:none;font-family:"Space Mono",monospace;font-size:.62rem;color:var(--faint);cursor:pointer;letter-spacing:.05em;transition:color .15s}
-footer button:hover{color:var(--text)}
-@media(max-width:500px){body{padding:1.5rem 1rem}.stories-grid{grid-template-columns:1fr}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cieunhong archive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #FFFFF0;
+            --text: #1a1a1a;
+            --muted: #888;
+            --faint: #bbb;
+            --border: rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: "Space Mono", monospace;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 2.5rem 1.5rem;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── LAYOUT ── */
+        .wrap {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── HEADER ── */
+        header {
+            margin-bottom: 3rem;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .site-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: "Space Mono", monospace;
+            font-size: 0.72rem;
+            color: var(--faint);
+            padding: 0;
+            transition: color 0.15s;
+            letter-spacing: 0.03em;
+        }
+
+        nav button:hover { color: var(--text); }
+
+        nav button.active {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .header-rule {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin-top: 1.25rem;
+        }
+
+        /* ── MAIN ── */
+        main { flex: 1; }
+
+        .tab { display: none; }
+        .tab.active { display: block; }
+
+        /* ── POST LIST ── */
+        .post-list {
+            list-style: none;
+        }
+
+        .post-item {
+            padding: 1.4rem 0;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+
+        .post-item:first-child {
+            border-top: none;
+        }
+
+        .post-item:hover .post-title {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .post-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .post-excerpt {
+            font-size: 0.75rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-date {
+            font-size: 0.65rem;
+            color: var(--faint);
+            letter-spacing: 0.06em;
+        }
+
+        /* ── SINGLE POST ── */
+        .post-view { display: none; }
+        .post-view.active { display: block; }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-family: "Space Mono", monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 2rem;
+            letter-spacing: 0.02em;
+        }
+
+        .back-btn:hover { color: var(--text); }
+
+        .post-full-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .post-full-body {
+            font-size: 0.78rem;
+            line-height: 1.9;
+            color: #444;
+        }
+
+        .post-full-body p { margin-bottom: 1rem; }
+
+        .post-full-date {
+            font-size: 0.65rem;
+            color: var(--faint);
+            letter-spacing: 0.06em;
+            margin-top: 2rem;
+        }
+
+        /* ── STORIES ── */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .story-card {
+            border: 1px solid var(--border);
+        }
+
+        .story-img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #f0ede0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            color: var(--faint);
+            letter-spacing: 0.08em;
+        }
+
+        .story-caption {
+            padding: 0.6rem 0.75rem;
+            font-size: 0.65rem;
+            color: var(--muted);
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .story-date {
+            padding: 0 0.75rem 0.6rem;
+            font-size: 0.6rem;
+            color: var(--faint);
+            letter-spacing: 0.05em;
+        }
+
+        /* ── GUESTBOOK ── */
+        .guestbook-prompt {
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 0.85rem;
+            font-family: "Space Mono", monospace;
+            font-size: 0.72rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            resize: none;
+            height: 90px;
+            outline: none;
+            line-height: 1.6;
+            transition: border-color 0.15s;
+        }
+
+        textarea:focus { border-color: var(--text); }
+        textarea::placeholder { color: var(--faint); }
+
+        .submit-btn {
+            margin-top: 0.6rem;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            font-family: "Space Mono", monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: opacity 0.15s;
+        }
+
+        .submit-btn:hover { opacity: 0.75; }
+
+        .messages {
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .msg {
+            padding: 0.85rem;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.4);
+        }
+
+        .msg p {
+            font-size: 0.72rem;
+            line-height: 1.7;
+            color: #444;
+        }
+
+        .msg-meta {
+            font-size: 0.6rem;
+            color: var(--faint);
+            margin-top: 0.5rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            max-width: 600px;
+            width: 100%;
+            margin: 3rem auto 0;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.62rem;
+            color: var(--faint);
+            letter-spacing: 0.05em;
+        }
+
+        footer button {
+            background: none;
+            border: none;
+            font-family: "Space Mono", monospace;
+            font-size: 0.62rem;
+            color: var(--faint);
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            transition: color 0.15s;
+        }
+
+        footer button:hover { color: var(--text); }
+
+        @media (max-width: 500px) {
+            body { padding: 1.5rem 1rem; }
+            .stories-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
+
 <div class="wrap">
-<header>
-<div class="header-row">
-<a class="site-title" onclick="showTab('post');showList()">cieunhong.</a>
-<nav>
-<button id="btn-post" onclick="showTab('post');showList()" class="active">post</button>
-<button id="btn-stories" onclick="showTab('stories')">stories</button>
-<button id="btn-guestbook" onclick="showTab('guestbook')">guestbook</button>
-</nav>
+    <header>
+        <div class="header-row">
+            <a class="site-title" onclick="showTab('post'); showList()">cieunhong.</a>
+            <nav>
+                <button id="btn-post" onclick="showTab('post'); showList()" class="active">post</button>
+                <button id="btn-stories" onclick="showTab('stories')">stories</button>
+                <button id="btn-guestbook" onclick="showTab('guestbook')">guestbook</button>
+            </nav>
+        </div>
+        <hr class="header-rule">
+    </header>
+
+    <main>
+
+        <!-- ── POST TAB ── -->
+        <div id="tab-post" class="tab active">
+
+            <!-- 글 목록 -->
+            <ul class="post-list" id="post-list">
+                <!-- 새 글은 여기에 추가하세요 ↓ -->
+
+                <li class="post-item" onclick="openPost(0)">
+                    <div class="post-title">나만의 디지털 아카이브를 시작하며</div>
+                    <div class="post-excerpt">매달 나가는 돈 없이 저 개발자(윌리엄)처럼 평생 무료로 사이트를 운영하기 위해, 결국 코딩 메모장 방식을 감수해보기로 했다...</div>
+                    <div class="post-date">27-05-2026</div>
+                </li>
+
+                <!-- 글 추가 예시:
+                <li class="post-item" onclick="openPost(1)">
+                    <div class="post-title">두 번째 글 제목</div>
+                    <div class="post-excerpt">미리보기 텍스트...</div>
+                    <div class="post-date">28-05-2026</div>
+                </li>
+                -->
+            </ul>
+
+            <!-- 글 본문 (클릭하면 열림) -->
+            <div class="post-view" id="post-view">
+                <button class="back-btn" onclick="showList()">← back</button>
+                <div class="post-full-title" id="pv-title"></div>
+                <div class="post-full-body" id="pv-body"></div>
+                <div class="post-full-date" id="pv-date"></div>
+            </div>
+
+        </div>
+
+        <!-- ── STORIES TAB ── -->
+        <div id="tab-stories" class="tab">
+            <div class="stories-grid">
+                <!-- 새 사진은 여기에 추가하세요 ↓ -->
+
+                <div class="story-card">
+                    <div class="story-img">[사진 자리]</div>
+                    <div class="story-caption">오늘 마신 커피. 이 작은 조각들이 모여 나의 하루가 흘러간다.</div>
+                    <div class="story-date">27-05-2026</div>
+                </div>
+
+                <!-- 사진 추가 예시:
+                <div class="story-card">
+                    <img src="사진파일명.jpg" alt="설명" style="width:100%;aspect-ratio:4/3;object-fit:cover;">
+                    <div class="story-caption">사진 설명</div>
+                    <div class="story-date">날짜</div>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <!-- ── GUESTBOOK TAB ── -->
+        <div id="tab-guestbook" class="tab">
+            <p class="guestbook-prompt">오늘 당신의 하루는 어떤 색이었나요? — 익명으로 편하게 흔적을 남겨주세요.</p>
+
+            <textarea id="guest-input" placeholder="leave your anonymous note here..."></textarea>
+            <br>
+            <button class="submit-btn" onclick="submitNote()">submit note</button>
+
+            <div class="messages" id="messages">
+                <div class="msg">
+                    <p>홈페이지 분위기가 너무 차분하고 예뻐요. 자주 놀러 올게요!</p>
+                    <div class="msg-meta">anonymous — 27-05-2026</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
 </div>
-<hr class="header-rule">
-</header>
-<main>
-<div id="tab-post" class="tab active">
-<ul class="post-list" id="post-list">
-{{ range where .Site.RegularPages "Section" "posts" }}
-<li class="post-item" onclick="openPost({{ .Title | jsonify }}, {{ .Content | jsonify }}, '{{ .Date.Format "02-01-2006" }}')">
-<div class="post-title">{{ .Title }}</div>
-<div class="post-excerpt">{{ .Summary }}</div>
-<div class="post-date">{{ .Date.Format "02-01-2006" }}</div>
-</li>
-{{ end }}
-</ul>
-<div class="post-view" id="post-view">
-<button class="back-btn" onclick="showList()">← back</button>
-<div class="post-full-title" id="pv-title"></div>
-<div class="post-full-body" id="pv-body"></div>
-<div class="post-full-date" id="pv-date"></div>
-</div>
-</div>
-<div id="tab-stories" class="tab">
-<div class="stories-grid">
-{{ range where .Site.RegularPages "Section" "stories" }}
-<div class="story-card">
-{{ with .Params.image }}<div class="story-img"><img src="{{ . }}" alt="{{ $.Title }}"></div>{{ else }}<div class="story-img">[사진]</div>{{ end }}
-<div class="story-caption">{{ .Title }}</div>
-<div class="story-date">{{ .Date.Format "02-01-2006" }}</div>
-</div>
-{{ end }}
-</div>
-</div>
-<div id="tab-guestbook" class="tab">
-<p class="guestbook-prompt">오늘 당신의 하루는 어떤 색이었나요? — 익명으로 편하게 흔적을 남겨주세요.</p>
-<textarea id="guest-input" placeholder="leave your anonymous note here..."></textarea><br>
-<button class="submit-btn" onclick="submitNote()">submit note</button>
-<div class="messages" id="messages">
-<div class="msg"><p>홈페이지 분위기가 너무 차분하고 예뻐요. 자주 놀러 올게요!</p><div class="msg-meta">anonymous — 27-05-2026</div></div>
-</div>
-</div>
-</main>
-</div>
+
 <footer>
-<span>© 2026 cieunhong.</span>
-<button onclick="toggleAdmin()">admin</button>
+    <span>© 2026 cieunhong.</span>
+    <button onclick="toggleAdmin()">admin</button>
 </footer>
+
 <script>
-function showTab(n){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');document.getElementById('btn-'+n).classList.add('active')}
-function openPost(title,body,date){document.getElementById('pv-title').textContent=title;document.getElementById('pv-body').innerHTML=body;document.getElementById('pv-date').textContent=date;document.getElementById('post-list').style.display='none';document.getElementById('post-view').classList.add('active')}
-function showList(){document.getElementById('post-list').style.display='';document.getElementById('post-view').classList.remove('active')}
-function submitNote(){const i=document.getElementById('guest-input');const t=i.value.trim();if(!t)return;const m=document.getElementById('messages');const d=document.createElement('div');d.className='msg';const n=new Date();const s=String(n.getDate()).padStart(2,'0')+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+n.getFullYear();d.innerHTML='<p>'+t+'</p><div class="msg-meta">anonymous — '+s+'</div>';m.insertBefore(d,m.firstChild);i.value=''}
-function toggleAdmin(){const p=prompt("enter admin password:");if(p==="cieun1520"){alert("welcome back, cieun.")}else if(p!==null){alert("access denied.")}}
+    // ── 글 데이터 ──
+    // 새 글 추가할 때 여기에도 추가하세요 (목록과 순서 맞춰서)
+    const posts = [
+        {
+            title: "나만의 디지털 아카이브를 시작하며",
+            date: "27-05-2026",
+            body: `<p>매달 나가는 돈 없이 저 개발자(윌리엄)처럼 평생 무료로 사이트를 운영하기 위해, 결국 코딩 메모장 방식을 감수해보기로 했다.</p>
+                   <p>처음엔 영어가 가득한 코드가 낯설고 무서웠는데, 막상 이렇게 한글로 일기를 적어 넣으니 나만의 진짜 비밀 기지를 짓는 것 같아서 묘한 성취감이 든다.</p>
+                   <p>앞으로 이곳에 내 생각과 조각들을 차곡차곡 모아나가야지.</p>`
+        },
+        // 새 글 추가 예시:
+        // {
+        //     title: "두 번째 글 제목",
+        //     date: "28-05-2026",
+        //     body: `<p>본문 내용...</p>`
+        // },
+    ];
+
+    // ── 탭 전환 ──
+    function showTab(name) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        document.getElementById('btn-' + name).classList.add('active');
+    }
+
+    // ── 글 열기/닫기 ──
+    function openPost(idx) {
+        const p = posts[idx];
+        document.getElementById('pv-title').textContent = p.title;
+        document.getElementById('pv-body').innerHTML = p.body;
+        document.getElementById('pv-date').textContent = p.date;
+        document.getElementById('post-list').style.display = 'none';
+        document.getElementById('post-view').classList.add('active');
+    }
+
+    function showList() {
+        document.getElementById('post-list').style.display = '';
+        document.getElementById('post-view').classList.remove('active');
+    }
+
+    // ── 방명록 ──
+    function submitNote() {
+        const input = document.getElementById('guest-input');
+        const text = input.value.trim();
+        if (!text) return;
+        const msgs = document.getElementById('messages');
+        const div = document.createElement('div');
+        div.className = 'msg';
+        const today = new Date();
+        const dateStr = `${String(today.getDate()).padStart(2,'0')}-${String(today.getMonth()+1).padStart(2,'0')}-${today.getFullYear()}`;
+        div.innerHTML = `<p>${text}</p><div class="msg-meta">anonymous — ${dateStr}</div>`;
+        msgs.insertBefore(div, msgs.firstChild);
+        input.value = '';
+    }
+
+    // ── 어드민 ──
+    function toggleAdmin() {
+        const pw = prompt("enter admin password:");
+        if (pw === "cieun1520") {
+            alert("welcome back, cieun.");
+        } else if (pw !== null) {
+            alert("access denied.");
+        }
+    }
 </script>
 </body>
 </html>
