@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: 1019cieun2/cieunhong
+  branch: main
+
+media_folder: static/images
+public_folder: /images
+
+collections:
+  - name: posts
+    label: Posts
+    folder: content/posts
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: stories
+    label: Stories
+    folder: content/stories
+    create: true
+    fields:
+      - { label: Title/Caption, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime }
+      - { label: Image, name: image, widget: image, required: false }

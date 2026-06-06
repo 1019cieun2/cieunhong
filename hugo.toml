@@ -1,0 +1,7 @@
+baseURL = "https://cieunhong.netlify.app"
+languageCode = "ko"
+title = "cieunhong"
+theme = "cieunhong"
+
+[params]
+  description = "cieunhong archive"
